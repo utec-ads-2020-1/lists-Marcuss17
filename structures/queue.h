@@ -13,16 +13,45 @@ class queue {
 	int capacity;
 
 public:
-	stack(int size = MAX);
-	~stack();   		
+	queue(int size = MAX){
+		capacity = size;
+		data = new T[capacity];
+		top = -1;
+	}
+	~queue(){
+		delete[] data;
+		cout << "Queue deleted!\n";
+	};   		
 
-	void push(T);
-	int pop();
-	int front();
-    int back();
+	void push(T element){
+		if(top+1 == MAX){
+			cerr << "The queue is full!\n";
+		}else{
+			top++;
+			data[top] = element;	
+		}
+	}
+	int pop(){
+		if(empty()){
+			cerr << "The queue is empty!\n";
+		}else{
+			top--;
+		}	
+	}
+	int front(){
+		return data[0];	
+	};
+    	int back(){
+		return data[top];
+	};
 
-	int size();
-	bool empty();
+	int size(){
+		return top+1;
+	};
+	bool empty(){
+		if(top == -1){ return true;}
+		else{return false;}
+	};
 };
 
 #endif

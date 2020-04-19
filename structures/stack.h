@@ -28,10 +28,6 @@ public:
 	void push(T element){
             if(top+1 == MAX){
                 cerr << "The stack is full!\n";
-            }
-            if(top == -1){
-                top++;
-                data[top] = element;
             }else{
                 top++;
                 data[top] = element;
@@ -43,7 +39,6 @@ public:
                 cerr << "The Stack is empty!\n";
             }else{
                 top--;
-                data[top];
             }
         };
 
