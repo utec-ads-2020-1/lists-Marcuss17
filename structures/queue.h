@@ -35,7 +35,11 @@ public:
 		if(empty()){
 			cerr << "The queue is empty!\n";
 		}else{
+			//Queue is different because the pop is in the front
 			top--;
+			for(int i = 0; i <= top; i++){
+				data[i] = data[i+1];
+			}
 		}	
 	}
 	int front(){
