@@ -15,9 +15,9 @@ class stack {
 public:
 
 	stack(int size = MAX){
+            capacity = size;
             data = new T[capacity];
             top = -1;
-            capacity = size;
         };
 
 	~stack(){ 
