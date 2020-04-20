@@ -8,23 +8,103 @@
 template <typename T>
 class ForwardList : public List<T> {
     public:
-        ForwardList() : List<T>() {}
+        ForwardList() : List<T>(){};
 
-        T front();
-        T back();
-        void push_front(T);
-        void push_back(T);
-        void pop_front();
-        void pop_back();
-        T operator[](int);
-        bool empty();
-        int size();
-        void clear();
-        void sort();
+        T front(){
+		return this.head->data;
+	};
+
+        T back(){
+		auto aux = this.head;
+		while(aux->next != nullptr){
+			aux = aux->next;
+		}
+		return aux->data;
+	};
+
+        void push_front(T element){
+		Node<T>* newNode = new Node<T>();
+		newNode->data = element;
+		newNode->next = this.head;
+		this.head = newNode;
+		this.nodes++;
+	};
+
+        void push_back(T element){
+		Node<T>* newNode = new Node<T>();
+		newNode->data = element;
+		newNode->next = nullptr;
+		if(this.head == nullptr){
+			this.head = newNode;
+		}else{
+			auto aux = this.head;
+			while(aux->next != nullptr){
+				aux = aux->next;	
+			}
+			aux->next = newNode;
+		}	
+		this.nodes++;
+	};
+
+        void pop_front(){
+		auto aux = this.head;
+		head = head->next;
+		delete aux;	
+		this.nodes--;
+	}
+
+        void pop_back(){
+		auto aux = this.head;
+		while(aux->next != nullptr){
+			aux = aux->next;
+		}
+		delete aux;
+		aux = nullptr;
+		this.nodes--;
+	};
+	
+        T operator[](int index){
+		int ind = 0;
+		auto aux = this.head;
+		while(ind != index){
+			aux = aux->next;	
+			ind++;
+		}
+		return aux->data;
+	};
+	
+        bool empty(){
+		return this.head==nullptr;
+	};
+        int size(){
+		return this.nodes;
+	};
+        void clear(){
+		auto aux = this.head;
+		while(aux->next != nullptr){
+			auto aux2 = aux;
+			delete aux2;
+			aux = aux->next;
+			
+		}
+		this.nodes = 0;
+	}
+        void sort(){
+		auto aux = this.head;
+		while(aux -> next != nullptr){
+			auto aux2 = aux->next;
+			while(aux2 ->next != nullptr){
+				if(aux2 -> data < aux -> data){
+					swap(aux2->data,aux->data);
+				}
+			} 
+		}		
+	}
         void reverse();
+	
 
         ForwardIterator<T> begin();
-	    ForwardIterator<T> end();
+	ForwardIterator<T> end();
 
         string name() {
             return "Forward List";
