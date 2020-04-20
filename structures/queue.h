@@ -31,7 +31,7 @@ public:
 			data[top] = element;	
 		}
 	}
-	int pop(){
+	void pop(){
 		if(empty()){
 			cerr << "The queue is empty!\n";
 		}else{

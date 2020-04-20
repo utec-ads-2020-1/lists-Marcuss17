@@ -34,7 +34,7 @@ public:
             }
         };
 
-	int pop(){
+	void pop(){
             if(empty()){
                 cerr << "The Stack is empty!\n";
             }else{
