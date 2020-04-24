@@ -23,6 +23,9 @@ class ForwardList : public List<T> {
 			newNode->data = element;
 			newNode->next = this->head;
 			this->head = newNode;
+            if(this->tail == nullptr){
+                this->tail = newNode;
+            }
 			this->nodes++;
 		};
 
