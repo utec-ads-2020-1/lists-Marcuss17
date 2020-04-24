@@ -7,19 +7,35 @@
 template <typename T> 
 class ForwardIterator {
     private:
-        Node<T> *current;
+       Node<T> *current;
 
     public:
-        ForwardIterator();
-        ForwardIterator(Node<T>*);
+    
+        ForwardIterator(){
+            current = nullptr;
+        };
+
+        ForwardIterator(Node<T>* it){
+            current = it;
+        };
 
         ForwardIterator<T> operator=(ForwardIterator<T>);
 
-        bool operator!=(ForwardIterator<T>);
+        bool operator!=(ForwardIterator<T> it){
+            if(it.current != current){
+                return true;
+            }
+            return false;
+        }
 
-        ForwardIterator<T> operator++();
+        ForwardIterator<T> operator++(){
+            
 
-        T operator*();
+        }
+
+        T operator*(){
+            return current->data;
+        }
 };
 
 #endif
