@@ -11,10 +11,16 @@ class LinkedList : public List<T> {
         LinkedList() : List<T>() {}
 
         T front(){
+            if(empty()){
+                throw string("List is empty!");
+            }
             return this->head->data;
         }
 
         T back(){
+            if(empty()){
+                throw string("List is empty!");
+            }
             return this->tail->data;
         }
 
@@ -47,7 +53,7 @@ class LinkedList : public List<T> {
                 newNode->prev = aux;
             }
             this->tail = newNode;
-            this->node++;
+            this->nodes++;
         }
 
         void pop_front(){
@@ -68,6 +74,12 @@ class LinkedList : public List<T> {
         }
 
         T operator[](int index){
+            if(empty()){
+                throw string("The list is empty!");
+            }
+            if(index > size()-1 || index < 0){
+                throw string("Error in the index, check it!");
+            }
             int ind = 0;
 			auto aux = this->head;
 			while(ind != index){
@@ -82,13 +94,13 @@ class LinkedList : public List<T> {
         }
 
         int size(){
-            return this->nodess;
+            return this->nodes;
         }
 
         void clear(){
             while(this->head != nullptr){
 				auto aux = this->head;
-				his->head= this->head->next;
+				this->head= this->head->next;
 				delete aux;	
 			}
 
@@ -97,13 +109,16 @@ class LinkedList : public List<T> {
         }
         
         void sort(){
-            auto aux = this->head;
-			for(int i = 0; i <= size()-2; i++){
-				auto aux2 = aux->next;
-				for(int j = 1; j <= size()-1; j++){
-					if(aux-> data > aux2->data){
-						swap(aux->data, aux2->data);
+			auto current = this->tail->prev;
+			auto aux = this->head;
+			auto aux2 = this->head;
+			while(aux != current){
+				aux2 = this->head;
+				while(aux2 != this->tail){
+					if(aux2->data > aux2->next->data){
+						swap(aux2->data,aux2->next->data);
 					}
+					aux2 = aux2->next;
 				}
 				aux = aux->next;
 			}
@@ -119,28 +134,26 @@ class LinkedList : public List<T> {
 			}
         }
 
-        BidirectionalIterator<T> begin();
-	    BidirectionalIterator<T> end();
+        BidirectionalIterator<T> begin(){
+            BidirectionalIterator<T> it(this->head);
+            return it;
+        }
+	    BidirectionalIterator<T> end(){
+            BidirectionalIterator<T> it(this->tail->next);
+            return it;
+        }
 
         string name() {
             return "Linked List";
         }
 
-        /**
-         * Merges x into the list by transferring all of its elements at their respective 
-         * ordered positions into the container (both containers shall already be ordered).
-         * 
-         * This effectively removes all the elements in x (which becomes empty), and inserts 
-         * them into their ordered position within container (which expands in size by the number 
-         * of elements transferred). The operation is performed without constructing nor destroying
-         * any element: they are transferred, no matter whether x is an lvalue or an rvalue, 
-         * or whether the value_type supports move-construction or not.
-        */
         void merge(LinkedList<T>& secondLinked){
             this->nodes += secondLinked.size();
             auto secondHead = secondLinked.head;
-            this->tail->next = secondHead;
-            secondHead.prev = this->tail;
+            auto aux = this->tail;
+            aux->next = secondHead;
+            secondHead->prev = aux;
+            this->tail = secondLinked.tail;
 
             sort();
 
