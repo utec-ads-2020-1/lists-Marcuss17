@@ -10,18 +10,39 @@ class BidirectionalIterator {
         Node<T> *current;
 
     public:
-        BidirectionalIterator();
-        BidirectionalIterator(Node<T>*);
+        BidirectionalIterator(){
+            current = nullptr;
+        }
 
-        BidirectionalIterator<T> operator=(BidirectionalIterator<T>);
+        BidirectionalIterator(Node<T>* it){
+            current = it;
+        }
 
-        bool operator!=(BidirectionalIterator<T>);
+        BidirectionalIterator<T> operator=(BidirectionalIterator<T> it2){
+            it2.current =  current;
+        }
 
-        BidirectionalIterator<T> operator++();
+        bool operator!=(BidirectionalIterator<T> it2){
+            return !(it2.current == current);
+        }
 
-        BidirectionalIterator<T> operator--();
+        BidirectionalIterator<T> operator++(){
+            if( current == nullptr){
+                throw string("No more elements in the list. Cant go forward.");
+            }
+            current = current->next;
+        }
 
-        T operator*();
+        BidirectionalIterator<T> operator--(){
+            if(current == nullptr){
+                throw string("No more elements in the list. Cant go backwards.");
+            }
+            current = current->prev;
+        }
+
+        T operator*(){
+            return current->data;
+        }
 };
 
 #endif
