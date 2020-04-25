@@ -91,25 +91,34 @@ class ForwardList : public List<T> {
         void clear(){	
 			while(this->head != nullptr){
 				auto aux = this->head;
-				his->head= this->head->next;
+				this->head= this->head->next;
 				delete aux;	
-			}
+		}
 
 			this->tail = this->head;
 			this->nodes = 0;
 		}
 
         void sort(){
+			auto it = this->head;
+			auto current = this->head;
+			while(it->next!= nullptr){
+				current = it;
+				it = it->next;
+			}
+
 			auto aux = this->head;
-			for(int i = 0; i <= size()-2; i++){
-				auto aux2 = aux->next;
-				for(int j = 1; j <= size()-1; j++){
-					if(aux-> data > aux2->data){
-						swap(aux->data, aux2->data);
+			auto aux2 = this->head;
+			while(aux != current){
+				aux2 = this->head;
+				while(aux2 != this->tail){
+					if(aux2->data > aux2->next->data){
+						swap(aux2->data,aux2->next->data);
 					}
+					aux2 = aux2->next;
 				}
 				aux = aux->next;
-			}	
+			}
 		}
 		
 		void reverse(){
@@ -139,17 +148,19 @@ class ForwardList : public List<T> {
         
 
         void merge(ForwardList<T>& secondForward){
-			this->nodes += secondForward.size();
-			auto secondHead = secondForward.head;
-			this->tail->next = secondHead;
+		    this->nodes += secondForward.size();
+            auto secondHead = secondForward.head;
+			auto aux = this->tail;
+			aux->next = secondHead;
+			this->tail = secondForward.tail;
 
-			sort();
 
-			while(secondForward.head != nullptr){
-				secondForward.head = secondForward.head->next;
+            sort();
+
+            while(secondForward.head != nullptr){
+                secondForward.head = secondForward.head->next;
 			}
-			
-			secondForward.clear();
+            secondForward.clear();
 		};
 };
 
