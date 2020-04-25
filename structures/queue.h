@@ -43,9 +43,15 @@ public:
 		}	
 	}
 	int front(){
+		if(empty()){
+			throw string("Queue empty!");
+		}
 		return data[0];	
 	};
     	int back(){
+			if(empty()){
+				throw string("Queue empty!");
+			}
 		return data[top];
 	};
 

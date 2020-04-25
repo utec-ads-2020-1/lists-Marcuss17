@@ -43,6 +43,9 @@ public:
         };
 
 	int returnTop(){
+        if(empty()){
+            throw string("Stack is empty!");
+        }
             return data[top];
         };
 
