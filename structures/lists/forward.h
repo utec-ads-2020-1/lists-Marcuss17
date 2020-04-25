@@ -11,10 +11,16 @@ class ForwardList : public List<T> {
 	ForwardList() : List<T>(){};
 
 		T front(){
-		return this->head->data;
+			if(empty()){
+				throw string("List is empty!");
+			}
+			return this->head->data;
 		}
 
         T back(){
+			if(empty()){
+				throw string("List is empty!");
+			}
 			return this->tail->data;
 		}
 
@@ -71,6 +77,14 @@ class ForwardList : public List<T> {
 		}
 	
         T operator[](int index){
+			if(empty()){
+                throw string("The list is empty!");
+            }
+			
+            if(index > size()-1 || index < 0){
+                throw string("Check your index");
+            }
+
 			int ind = 0;
 			auto aux = this->head;
 			while(ind != index){
