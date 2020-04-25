@@ -51,8 +51,7 @@ int main(){
     cout << "-----Reversing list-----" << endl;
     linkedList.reverse();
     print(linkedList);
-    auto it = linkedList.begin();
-    cout << "The list begins with: " << *it << endl;
+  
 
     LinkedList<int> secondLinked;
     secondLinked.push_back(12);
@@ -66,6 +65,19 @@ int main(){
     cout << "Last element in the merged list is: " << linkedList[5] << endl;
 	cout << "Size of the merged list is:" << linkedList.size() << endl;
 	cout << "The new tail hast this element: " << linkedList.back() << endl;
+
+    cout <<"Trying iterators. " << endl;
+    BidirectionalIterator<int> it = linkedList.begin();
+    cout << "The list begins with: " << *it << endl;
+    ++it;
+    cout << "Moving pointer forward: " << *it << endl;
+    --it;
+    cout << "Moing pointer backward: " << *it << endl;
+    
+    cout << "Are it and linked.begin() different? ";
+    cout << (it != linkedList.begin()) << endl;
+ 
+
 
     return 0;
 }

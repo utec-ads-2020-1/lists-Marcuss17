@@ -13,24 +13,27 @@ class ForwardIterator {
     
         ForwardIterator(){
             current = nullptr;
-        };
+        }
 
         ForwardIterator(Node<T>* it){
             current = it;
-        };
+        }
 
-        ForwardIterator<T> operator=(ForwardIterator<T>);
+        ForwardIterator<T> operator=(ForwardIterator<T> it2){
+            it2.current = current;
+        }
 
         bool operator!=(ForwardIterator<T> it){
-            if(it.current != current){
-                return true;
-            }
-            return false;
+            //Returns true if it.current and current are not 
+            //pointing the same position
+            return !(it.current == current);
         }
 
         ForwardIterator<T> operator++(){
-            
-
+            if( current == nullptr){
+                throw string("No more elements in the list. Cant go forward.");
+            }
+            current = current->next;
         }
 
         T operator*(){
