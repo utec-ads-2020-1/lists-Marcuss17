@@ -10,18 +10,114 @@ class LinkedList : public List<T> {
     public:
         LinkedList() : List<T>() {}
 
-        T front();
-        T back();
-        void push_front(T);
-        void push_back(T);
-        void pop_front();
-        void pop_back();
-        T operator[](int);
-        bool empty();
-        int size();
-        void clear();
-        void sort();
-        void reverse();
+        T front(){
+            return this->head->data;
+        }
+
+        T back(){
+            return this->tail->data;
+        }
+
+        void push_front(T element){
+            Node<T>* newNode = new Node<T>();
+			newNode->data = element;
+            newNode->prev = nullptr;
+            if(this->head == nullptr && this->tail == nullptr){
+                newNode->next = nullptr;
+                this->tail = newNode;
+            }else{
+                auto aux = this->head;
+                aux->prev = newNode;
+                newNode->next = aux;
+            }
+            this->head = newNode;
+			this->nodes++;
+        }
+
+        void push_back(T element){
+            Node<T>* newNode = new Node<T>();
+			newNode->data = element;
+            newNode->next = nullptr;
+            if(this->head == nullptr && this->tail == nullptr){
+                newNode->prev = nullptr;
+                this->head = newNode;
+            }else{
+                auto aux = this->tail;
+                aux->next = newNode;
+                newNode->prev = aux;
+            }
+            this->tail = newNode;
+            this->node++;
+        }
+
+        void pop_front(){
+            auto aux = this->head;
+            this->head = this->head->next;
+            this->head->prev = nullptr;
+            delete aux;
+            this->nodes--;
+        }
+
+        void pop_back(){
+            auto aux = this->tail;
+            this->tail = this->tail->prev;
+            this->tail->next = nullptr;
+            delete aux;
+            this->nodes--;
+
+        }
+
+        T operator[](int){
+            int ind = 0;
+			auto aux = this->head;
+			while(ind != index){
+				aux = aux->next;	
+				ind++;
+			}
+			return aux->data;
+        }
+
+        bool empty(){
+            return this->nodes == 0;
+        }
+
+        int size(){
+            return this->nodess;
+        }
+
+        void clear(){
+            while(this->head != nullptr){
+				auto aux = this->head;
+				his->head= this->head->next;
+				delete aux;	
+			}
+
+			this->tail = this->head;
+			this->nodes = 0;
+        }
+        
+        void sort(){
+            auto aux = this->head;
+			for(int i = 0; i <= size()-2; i++){
+				auto aux2 = aux->next;
+				for(int j = 1; j <= size()-1; j++){
+					if(aux-> data > aux2->data){
+						swap(aux->data, aux2->data);
+					}
+				}
+				aux = aux->next;
+			}
+        }
+
+        void reverse(){
+            for(int i = 0; i < size()-1; i++){
+				auto aux = this->head;
+				for(int j = 0; j < size()-1-i; j++){
+					swap(aux->data, aux->next->data);
+					aux = aux->next;
+				}
+			}
+        }
 
         BidirectionalIterator<T> begin();
 	    BidirectionalIterator<T> end();

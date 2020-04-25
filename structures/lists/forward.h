@@ -12,11 +12,11 @@ class ForwardList : public List<T> {
 
 		T front(){
 		return this->head->data;
-		};
+		}
 
         T back(){
 			return this->tail->data;
-		};
+		}
 
         void push_front(T element){
 			Node<T>* newNode = new Node<T>();
@@ -27,7 +27,7 @@ class ForwardList : public List<T> {
                 this->tail = newNode;
             }
 			this->nodes++;
-		};
+		}
 
         void push_back(T element){
 			Node<T>* newNode = new Node<T>();
@@ -45,7 +45,7 @@ class ForwardList : public List<T> {
 				aux->next = newNode;
 			}	
 			this->nodes++;
-		};
+		}
 
         void pop_front(){
 			auto aux = this->head;
@@ -68,7 +68,7 @@ class ForwardList : public List<T> {
 			delete aux;
 			
 			this->nodes--;
-		};
+		}
 	
         T operator[](int index){
 			int ind = 0;
@@ -78,27 +78,25 @@ class ForwardList : public List<T> {
 				ind++;
 			}
 			return aux->data;
-		};
+		}
 	
         bool empty(){
 			return this->nodes == 0;
-		};
+		}
 
         int size(){
 			return this->nodes;
-		};
-
-        void clear(){	
-		while(this->head->next != nullptr){
-			auto aux2 = this->head;
-			this->head= this->head->next;
-			delete aux2;	
 		}
 
-		this->head = nullptr;
-		this->tail = nullptr;
+        void clear(){	
+			while(this->head != nullptr){
+				auto aux = this->head;
+				his->head= this->head->next;
+				delete aux;	
+			}
 
-		this->nodes = 0;
+			this->tail = this->head;
+			this->nodes = 0;
 		}
 
         void sort(){
