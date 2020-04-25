@@ -1,6 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include <iostream>
 using namespace std;
 
 #define MAX 1000 
