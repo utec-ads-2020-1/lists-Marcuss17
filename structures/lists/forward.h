@@ -139,22 +139,16 @@ class ForwardList : public List<T> {
         
 
         void merge(ForwardList<T>& secondForward){
-
 			this->nodes += secondForward.size();
-
-			auto aux = this->head;
-			while(aux->next != nullptr){
-				aux = aux->next;
-			}
-
 			auto secondHead = secondForward.head;
-			aux->next = secondHead;
-
-			while(secondForward.head->next != nullptr){
-				secondForward.head = secondForward.head->next;
-			}
+			this->tail->next = secondHead;
 
 			sort();
+
+			while(secondForward.head != nullptr){
+				secondForward.head = secondForward.head->next;
+			}
+			
 			secondForward.clear();
 		};
 };

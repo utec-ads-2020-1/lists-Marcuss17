@@ -67,7 +67,7 @@ class LinkedList : public List<T> {
 
         }
 
-        T operator[](int){
+        T operator[](int index){
             int ind = 0;
 			auto aux = this->head;
 			while(ind != index){
@@ -136,7 +136,20 @@ class LinkedList : public List<T> {
          * any element: they are transferred, no matter whether x is an lvalue or an rvalue, 
          * or whether the value_type supports move-construction or not.
         */
-        void merge(LinkedList<T>&);
+        void merge(LinkedList<T>& secondLinked){
+            this->nodes += secondLinked.size();
+            auto secondHead = secondLinked.head;
+            this->tail->next = secondHead;
+            secondHead.prev = this->tail;
+
+            sort();
+
+            while(secondLinked.head != nullptr){
+                secondLinked.head = secondLinked.head->next;
+            }
+
+            secondLinked.clear();
+        }
 };
 
 #endif
