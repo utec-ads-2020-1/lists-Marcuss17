@@ -20,6 +20,7 @@ class BidirectionalIterator {
 
         BidirectionalIterator<T> operator=(BidirectionalIterator<T> it2){
             it2.current =  current;
+            // sin return?
         }
 
         bool operator!=(BidirectionalIterator<T> it2){
@@ -31,6 +32,7 @@ class BidirectionalIterator {
                 throw string("No more elements in the list. Cant go forward.");
             }
             current = current->next;
+            // sin return?
         }
 
         BidirectionalIterator<T> operator--(){
@@ -38,9 +40,11 @@ class BidirectionalIterator {
                 throw string("No more elements in the list. Cant go backwards.");
             }
             current = current->prev;
+            // sin return?
         }
 
         T operator*(){
+            // Si current es null?
             return current->data;
         }
 };

@@ -8,7 +8,7 @@
 template <typename T>
 class LinkedList : public List<T> {
     public:
-        LinkedList() : List<T>() {}
+        LinkedList() : List<T>() {} // Dónde igualas  head y tail a nullptr?
 
         T front(){
             if(empty()){

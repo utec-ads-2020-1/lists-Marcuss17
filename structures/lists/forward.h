@@ -143,7 +143,7 @@ class ForwardList : public List<T> {
 		    aux = aux->next;
 		}
 	    }
-        }
+        } // Muy desorndeado
 	
 
     	ForwardIterator<T> begin(){
@@ -153,7 +153,7 @@ class ForwardList : public List<T> {
 
 	ForwardIterator<T> end(){
 	    ForwardIterator<T> it(this->tail->next);
-	    return it;
+	    return it; // sentinel?
 	}
 
         string name() {
